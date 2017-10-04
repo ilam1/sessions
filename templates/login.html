@@ -7,7 +7,11 @@
 <body>
     <form action="/loggedin">
         <h3>What is your name?</h3>
-        <h4> {{ output }}</h4>
+        {% if output != None %}
+            {{ output }}
+        {% endif %}
+        {{ output }}
+        <br>
         <input type = 'text' name = 'username'><br>
         <input type = 'password' name="password">
         <br>

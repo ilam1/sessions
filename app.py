@@ -10,18 +10,26 @@ app.secret_key = os.urandom(32)
 
 @app.route("/")
 def hello_world():
-    return render_template("login.html")
+    print(session)
+    print(username in session)
+    if username in session:
+        return render_template("loggedin.html")
+
+    return render_template("login.html", output = correct())
 
 def correct():
-    user_right = (username == request.args["username"])
-    pass_right = (password == request.args["password"])
-    if user_right and pass_right:
-        session[username] = password
-        return "Welcome!"
-    elif user_right and not pass_right:
-        return "Error: Wrong password"
-    else:
-        return "Error: Wrong username"
+    try:
+        user_right = (username == request.args["username"])
+        pass_right = (password == request.args["password"])
+        if user_right and pass_right:
+            session[username] = password
+            return "Welcome!"
+        elif user_right and not pass_right:
+            return "Error: Wrong password"
+        else:
+            return "Error: Wrong username"
+    except:
+        pass
 
 @app.route("/loggedin")
 def logged_in():
