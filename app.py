@@ -1,20 +1,22 @@
-from flask import Flask, render_template, request, redirect
+from flask import Flask, render_template, request, redirect, session
+import os
 
 app = Flask (__name__)
 
 username = "user"
 password = "pwd"
 out = ""
+app.secret_key = os.urandom(32)
+
 @app.route("/")
 def hello_world():
-    #print(request.args)
-    #print(request.args["username"] == username and request.args["password"] == password)
-    return render_template("login.html", output = out)
+    return render_template("login.html")
 
 def correct():
     user_right = (username == request.args["username"])
     pass_right = (password == request.args["password"])
     if user_right and pass_right:
+        session[username] = password
         return "Welcome!"
     elif user_right and not pass_right:
         return "Error: Wrong password"
@@ -23,18 +25,7 @@ def correct():
 
 @app.route("/loggedin")
 def logged_in():
-    print(request.args)
-    '''
-    if correct() == 0:
-        out = "Welcome!"
-    elif correct() == 1:
-        out = "Error: Wrong password"
-        return redirect("/")
-    else:
-        out = "Error: Wrong username"
-        return redirect("/")
-    '''
-
+#    print(request.args)
     return render_template("loggedin.html", output = correct())
 
 if __name__ == '__main__':
