@@ -1,21 +1,19 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <title>Title</title>
-</head>
-<body>
+  </head>
+  <body>
     <form action="/loggedin">
-        <h3>What is your name?</h3>
-        {% if output != None %}
-            {{ output }}
-        {% endif %}
-        {{ output }}
-        <br>
-        <input type = 'text' name = 'username'><br>
-        <input type = 'password' name="password">
-        <br>
-        <input type = 'submit'>
+      <h3>What is your name?</h3><br><br>
+      {{output}}
+      
+      <br>
+      <input type = 'text' name="username"> <br>
+      <input type = 'password' name="password">
+      <br>
+      <input type = 'submit'>
     </form>
-</body>
+  </body>
 </html>
